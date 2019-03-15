@@ -4,14 +4,20 @@ import './index.css';
 import App from './components/App';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import reducers from './reducers';
+import { reducer } from './reducers';
 
 const store = createStore(
-  () => {}, // this is the most basic reducer. A function that returns and object. Replace it.
-  applyMiddleware(thunk));
+  reducer, // this is the most basic reducer. A function that returns and object. Replace it.
+    {},
+    compose(
+      applyMiddleware(logger, thunk),
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    ),
+  );
 
+  
 ReactDOM.render(
   <Provider store={store}>
     <App />
