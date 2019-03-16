@@ -1,6 +1,6 @@
 1.  Name 3 JavaScript Array/Object Methods that do not produce side-effects? Which method do we use to create a new object while extending the properties of another object?
-#
-#
+#map which Creates a new array with the result of calling a function for each array element
+#filter which Creates a new array with every element in an array that pass a test
 #
 
 
