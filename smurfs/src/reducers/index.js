@@ -33,17 +33,27 @@ export const reducer = (state, action) => {
         ...state,
         fetchingSmurf: true
       };
-      case types.UPDATE_SMURF:
-      return {
-        ...state,
-        updatingSmurf: true
-      };
       case types.DELETE_SMURF:
       return {
         ...state,
         deletingSmurf: true
       };
+      case types.UPDATE_SMURF:
+      return {
+        ...state,
+        updatingSmurf: true
+      };
+
+      case types.ERROR:
+      return (
+        {
+          ...state,
+          error: action.error
+        }
+      )
     default:
       return state;
   }
 };
+
+

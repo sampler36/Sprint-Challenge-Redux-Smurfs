@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Merienda:700");
+
 .App {
   text-align: center;
 }
@@ -22,7 +24,24 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+
+.App {
+  text-align: center;
+}
+.nav {
+  margin-bottom: 50px;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-around;
+  font-family: 'Merienda', cursive;
+
+}
+
+.card {
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  
+
 }
