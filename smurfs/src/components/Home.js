@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const Home = () => {
     return (
         <div>
-        <div className="App">
+        <div className=" App" >
         { 
-            <img src={require('../components/smurf.jpg')} alt="Smurf" />
+            <img src={require("../components/smurf.jpg")} alt=" Smurf"  />
           }
           </div>
         </div>

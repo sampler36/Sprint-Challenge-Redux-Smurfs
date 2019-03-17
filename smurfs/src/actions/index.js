@@ -1,14 +1,18 @@
-
 /* 
   Action Types Go Here!
   Be sure to export each action type so you can pull it into your reducer
 */
-export const ADD_SMURF = "ADD_SMURF";
-export const GET_SMURF = "GET_SMURF";
-export const UPDATE_SMURF = "UPDATE_SMURF";
-export const DELETE_SMURF = "DELETE_SMURF";
-export const ERROR = "ERROR";
+import axios from 'axios'
 
+export const FETCH_SMURF = 'FETCH_SMURF';
+export const FETCHED_SMURF = 'FETCHED_SMURF';
+export const ERROR = 'ERROR';
+export const DELETE_SMURF = 'DELETING_SMURF';
+export const DELETED_SMURF = 'DELETED_SMURF';
+export const ADD_SMURF = 'ADD_SMURF';
+export const SAVED_SMURF = 'SAVED_SMURF';
+export const SELECT_SMURF = 'SELECT_SMURF';
+const theSmurfsURL = 'http://localhost:3333/smurfs';
 
 /*
   For this project you'll need at least 2 action creators for the main portion,
@@ -21,73 +25,52 @@ export const ERROR = "ERROR";
    D - deleteSmurf
 */
 
-
-const theSmurfsURL = 'http://localhost:3333/smurfs';
-
-// export const addSmurf = smurf => {
-//   const request = axios.post(theSmurfsURL, smurf)
-//   return (dispatch) => {
-//       request.then(({data})=> {
-//           dispatch({type: ADD_SMURF, payload: data})
-//       })
-//       .catch(err=> {
-//           dispatch({type: ERROR, error: err})            
-//       });
-//   };
-// };
-
-export const fetchSmurf = () => dispatch => {
-  // implement
-    fetch(theSmurfsURL)
-      .then(res => res.json())
-      .then(smurf => {
-        dispatch({ type: GET_SMURF, payload: smurf });
+export const fetchSmurf = () => {
+  const request = axios.get(theSmurfsURL)
+  return (dispatch) => {
+      request.then(({data})=> {
+          dispatch({type: FETCH_SMURF, payload: data})     //payload is a property that holds data in redux action object
+      })
+      .then(()=>{
+          dispatch({type: FETCHED_SMURF})
+      })
+      .catch(err=> {
+          dispatch({type: ERROR, error: err})            
       });
   };
-  
-  export const addSmurf = smurf => dispatch => {
-  // implement
-    fetch(theSmurfsURL, { method: 'POST', body: JSON.stringify(smurf) })
-      .then(res => res.json())
-      .then(smurf => {
-        dispatch({ type: ADD_SMURF, payload: smurf });
+};
+
+export const addSmurf = smurf => {
+  const request = axios.post(theSmurfsURL, smurf)
+  return (dispatch) => {
+      request.then(({data})=> {
+          dispatch({type: ADD_SMURF, payload: data})
+      })
+      .then(()=>{
+          dispatch({type: SAVED_SMURF})
+      })
+      .catch(err=> {
+          dispatch({type: ERROR, error: err})            
       });
   };
-  export const deleteSmurf = smurf => dispatch => {
-    // implement
-      fetch(theSmurfsURL, { method: 'GET', body: JSON.stringify(smurf) })
-        .then(res => res.json())
-        .then(smurf => {
-          dispatch({ type: DELETE_SMURF, payload: smurf });
-        });
-    };
+};
 
-    export const updateSmurf = smurf => dispatch => {
-      // implement
-        fetch(theSmurfsURL, { method: 'POST', body: JSON.stringify(smurf) })
-          .then(res => res.json())
-          .then(smurf => {
-            dispatch({ type: UPDATE_SMURF, payload: smurf });
-          });
-      };
+export const selectSmurf = id => ({
+  type: SELECT_SMURF,
+  id        
+})
 
-      // export function deleteSmurf(id) {
-      //   return {
-      //     type: types.DELETE_SMURF,
-      //     payload: id,
-      //   };
-      // }
-      
-      // export function addSmurf(name, age, height) {
-      //   return {
-      //     type: types.ADD_SMURF,
-      //     payload: {
-      //       id: uuid(),
-      //       name,
-      //       age,
-      //       height,
-      //     },
-      //   };
-      // }
-      
- 
+export const deleteSmurf = id => {    
+  const request = axios.delete(`http://localhost:3333/smurfs/${id}`)
+  return (dispatch) => {
+      request.then(({data})=> {
+          dispatch({type: DELETE_SMURF, payload: data})
+      })
+      .then(()=>{
+          dispatch({type: DELETED_SMURF})
+      })
+      .catch(err=> {
+          dispatch({type: ERROR, error: err})            
+      })
+  }
+}
