@@ -2,19 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchSmurf } from "../actions";
 import { selectSmurf } from "../actions";
+import { deleteSmurf  } from "../actions";
 
 class Smurfs extends Component {
   componentDidMount() {
     this.props.fetchSmurf();
   }
+  handleDelete = e => {
+    e.preventDefault();
+    this.props.deleteSmurf(this.props.id)
+}
 
   render() {
     return (
       <div className="Smurfs">
-        <h1>Smurf Village</h1>
-        <div className="App">
-          {<img src={require("../components/smurf.jpg")} alt="Smurf" />}
-        </div>
+      
         <ul>
           {this.props.smurfs.map((smurf) => {
             return (
@@ -30,6 +32,10 @@ class Smurfs extends Component {
             );
           })}
         </ul>
+{/* the button in smurfs not yet operational so i have to select from smurfs then delete in smurf form */}
+        {/* <form>
+        <button className="smurform" onClick={this.handleDelete}>Delete Smurf</button>
+        </form> */}
       </div>
     );
   }
@@ -43,5 +49,5 @@ const mapStatetoProps = (state) => {
 
 export default connect(
   mapStatetoProps,
-  { fetchSmurf, selectSmurf }
+  { fetchSmurf, selectSmurf, deleteSmurf }
 )(Smurfs);

@@ -1,10 +1,6 @@
-// import React, { Component } from "react";
-// import "./App.css";
-// import SmurfForm from "./SmurfForm";
-// import Smurfs from "./Smurfs";
-// import Nav from './Nav'
-// import Home from './Home'
-// import { BrowserRouter as Router, Route } from "react-router-dom";
+import Nav from './Nav'
+import Home from './Home'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // /*
 //  to wire this component up you're going to need a few things.
@@ -13,6 +9,8 @@
 //  `How do I ensure that my component links the state to props?`
 //  */
 
+
+// Still in the works
 // class App extends Component {
 //   render() {
 //     return (
@@ -24,12 +22,9 @@
 //         <Route className="form" path='/smurf-form' component={SmurfForm} />
 //         </div>
 //       </Router>
+ 
 
-//     );
-//   }
-// }
 
-// export default App;
 
 import React, { Component } from 'react';
 import './App.css';
@@ -44,10 +39,13 @@ import Smurfs from "./Smurfs"
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Smurfs />
-        <SmurfForm />
-      </div>
+      <Router>
+        <Nav />
+         <Route path='/'component={Home} />
+           <Route path='/smurfs' component={Smurfs} />
+           <Route path='/smurf-form' component={SmurfForm} />
+      </Router>
+     
     );
   }
 }
